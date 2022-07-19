@@ -2,6 +2,12 @@
   "name": "movies-app",
   "version": "0.1.0",
   "private": true,
+  "author": "Varjutin",
+  "binary": {
+    "module_name": "my-todo",
+    "module_path": "./build",
+    "host": "https://github.com/konst1984/Movie.git"
+  },
   "dependencies": {
     "@ant-design/icons": "latest",
     "@testing-library/jest-dom": "^5.16.4",
