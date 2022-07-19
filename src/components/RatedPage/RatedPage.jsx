@@ -29,6 +29,7 @@ export default class RatedPage extends React.Component {
     this.mountItemsOnPage(this.props.cards, 0, this.props.moviePerPage);
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.cards !== this.props.cards) {
       this.upDateState(this.props.cards);
@@ -93,7 +94,7 @@ export default class RatedPage extends React.Component {
     }
     return (
       <>
-        {!this.props.cards.length ? (
+        {!cards.length ? (
           <div className="message" style={{ fontSize: '32px', color: 'dodgerblue' }}>
             The rating list is empty
           </div>

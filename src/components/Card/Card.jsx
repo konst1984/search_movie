@@ -38,7 +38,7 @@ export default class Card extends React.Component {
 
   render() {
     const { poster, vote, title, date, genre, id, disabledStar, describe } = this.props;
-
+    const dateRelease = date ? format(new Date(date), 'MMMM d, yyyy') : null;
     return (
       <div className="card">
         <div className="card__image">
@@ -50,7 +50,7 @@ export default class Card extends React.Component {
         </div>
         <Rating vote={vote} />
         <h2 className="card__title">{title}</h2>
-        <div className="release-date">{format(new Date(date), 'MMMM d, yyyy')}</div>
+        <div className="release-date">{dateRelease}</div>
         <MyContext.Consumer>{({ genreData }) => <Genre genre={genre} genreData={genreData} />}</MyContext.Consumer>
         <div className="describe">{this.cropText(describe, 150)}</div>
         <RatingStars vote={vote} id={id} disabledStar={disabledStar} />

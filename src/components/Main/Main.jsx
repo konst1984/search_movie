@@ -31,12 +31,14 @@ export default class Main extends React.Component {
     this.getGenre();
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.searchValue !== this.state.searchValue) {
       this.updateAllMovie(this.state.searchValue, 1);
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentDidCatch(error, errorInfo) {
     this.setState({
       hasError: true,
@@ -74,7 +76,7 @@ export default class Main extends React.Component {
     });
   };
 
-  onError = (err) => {
+  onError = () => {
     this.setState({
       hasError: true,
       isLoading: false,
