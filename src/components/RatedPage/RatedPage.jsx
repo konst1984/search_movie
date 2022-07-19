@@ -33,6 +33,7 @@ export default class RatedPage extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.cards !== this.props.cards) {
       this.upDateState(this.props.cards);
+      this.onSwitchPage(this.state.page);
     }
   }
 
@@ -78,6 +79,7 @@ export default class RatedPage extends React.Component {
       const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
 
       let itemsOnPage = this.state.totalCards.slice(indexOfFirstMovie, indexOfLastMovie);
+
       return {
         page,
         itemsOnPage,
@@ -87,11 +89,12 @@ export default class RatedPage extends React.Component {
 
   render() {
     const { cards, ...itemProps } = this.props;
-    let totalRatePage = null;
+    let totalRatePage;
 
     if (this.state.totalCards.length) {
       totalRatePage = Math.ceil(this.state.totalCards.length / this.props.moviePerPage);
     }
+
     return (
       <>
         {!cards.length ? (
