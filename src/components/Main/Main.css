@@ -1,0 +1,19 @@
+.main {
+  padding: 15px 35px;
+  max-width: 1010px;
+  margin: auto;
+  text-align: center;
+  background-color: #ffffff;
+  min-height: 100%;
+}
+
+.ant-tabs > .ant-tabs-nav,
+.ant-tabs > div > .ant-tabs-nav {
+  width: min-content;
+}
+
+@media (max-width: 1024px) {
+  .main {
+    padding: 15px 16px;
+  }
+}

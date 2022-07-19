@@ -1,0 +1,27 @@
+.ant-spin.ant-spin-lg.ant-spin-spinning {
+  padding: 30px;
+}
+.ant-alert-with-description.ant-alert-no-icon {
+  margin-top: 15px;
+  border: 5px solid #f10e0e;
+}
+
+.ant-alert-with-description .ant-alert-description {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f10e0e;
+}
+
+.main .ant-alert-with-description .ant-alert-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f10e0e;
+}
+
+.main input.ant-input {
+  margin-bottom: 34px;
+}
+
+.ant-alert-message {
+  font-size: 30px;
+}
