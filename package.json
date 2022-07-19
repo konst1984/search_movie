@@ -38,8 +38,6 @@
     "format": "prettier --write src",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "pre-commit": "lint-staged",
-    "prepare": "husky install",
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
