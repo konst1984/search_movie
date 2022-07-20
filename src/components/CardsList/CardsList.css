@@ -6,10 +6,6 @@
   margin: 50px auto;
 }
 
-.cards__list--margin {
-  margin: 0 0 36px;
-}
-
 @media (max-width: 1024px) {
   .cards__list {
     gap: 20px;
@@ -20,5 +16,12 @@
   .cards__list {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     padding: 10px;
+  }
+}
+
+@media (max-width: 340px) {
+  .cards__list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    padding: 0;
   }
 }

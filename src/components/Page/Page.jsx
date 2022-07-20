@@ -2,11 +2,10 @@
 import React from 'react';
 import 'antd/dist/antd.min.css';
 
-import { Alert } from 'antd';
+import { Alert, Pagination, Spin } from 'antd';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line import/no-unresolved
-import PageContent from '../PageContent';
+import CardsList from '../CardsList';
 
 export default class Page extends React.Component {
   static defaultProps = {
@@ -27,7 +26,6 @@ export default class Page extends React.Component {
     disabledStar: PropTypes.bool,
     countPagination: PropTypes.number,
     onSwitchPage: PropTypes.func,
-    searchLine: PropTypes.object,
   };
 
   render() {
@@ -42,7 +40,6 @@ export default class Page extends React.Component {
       countPagination,
       onSwitchPage,
       disabledStar,
-      searchLine,
     } = this.props;
 
     const hasData = !(isLoading || hasError);
@@ -59,28 +56,31 @@ export default class Page extends React.Component {
       )
     ) : null;
 
-    let emptyRequest =
+    const emptyRequest =
       searchValue && cards.length === 0 ? (
         <Alert showIcon={false} message="Movies matching your search were not found" banner />
       ) : null;
 
-    return (
+    const cardlistOrSpin = (
       <>
-        {searchLine || null}
-        <PageContent
-          emptyRequest={emptyRequest}
-          hasData={hasData}
-          error={error}
-          moviePerPage={moviePerPage}
-          currentPage={currentPage}
-          searchValue={searchValue}
-          cards={cards}
-          totalPages={totalPages}
-          countPagination={countPagination}
-          onSwitchPage={onSwitchPage}
-          disabledStar={disabledStar}
-        />
+        {!hasData ? (
+          <CardsList cards={cards} disabledStar={disabledStar} />
+        ) : !(cards && searchValue) ? null : (
+          <Spin tip="Loading..." size="large" />
+        )}
+        {cards && totalPages > moviePerPage ? (
+          <Pagination
+            current={currentPage}
+            defaultPageSize={1}
+            total={countPagination}
+            defaultCurrent={1}
+            showSizeChanger={false}
+            onChange={onSwitchPage}
+          />
+        ) : null}
       </>
     );
+
+    return <>{error ? error : emptyRequest ? emptyRequest : cardlistOrSpin}</>;
   }
 }

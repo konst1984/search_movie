@@ -8,27 +8,14 @@ import Card from '../Card';
 const CardsList = ({ cards, disabledStar }) => {
   let cardsList = null;
 
-  const addCard = (item) => (
-    <Card
-      key={item.id}
-      poster={item.poster}
-      vote={item.vote}
-      id={item.id}
-      genre={item.genre}
-      title={item.title}
-      date={item.date}
-      describe={item.describe}
-      disabledStar={disabledStar}
-    />
-  );
-
+  const addCard = (card) => <Card key={card.id} disabledStar={disabledStar} {...card} />;
   if (cards.length) {
-    cardsList = cards.map((item) => {
-      return addCard(item);
+    cardsList = cards.map((card) => {
+      return addCard(card);
     });
   }
 
-  return <div className="cards__list cards__list--margin">{cardsList}</div>;
+  return <div className="cards__list">{cardsList}</div>;
 };
 
 CardsList.defaultProps = {

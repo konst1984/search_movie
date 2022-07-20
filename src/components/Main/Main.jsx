@@ -123,17 +123,17 @@ export default class Main extends React.Component {
   };
 
   render() {
-    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage } = this.state;
+    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage, ratedCards } = this.state;
+
     const tabsWithPage = (
       <TabsList
         left={
           <>
             <SearchLine onSearch={this.onSearch} />
             <SearchPage
-              // searchLine={<SearchLine onSearch={this.onSearch} />}
+              cards={cards}
               hasError={hasError}
               searchValue={searchValue}
-              cards={cards}
               isLoading={isLoading}
               currentPage={currentPage}
               moviePerPage={moviePerPage}
@@ -143,7 +143,7 @@ export default class Main extends React.Component {
             />
           </>
         }
-        right={<RatedPage cards={this.state.ratedCards} isLoading={isLoading} moviePerPage={moviePerPage} />}
+        right={<RatedPage cards={ratedCards} isLoading={isLoading} moviePerPage={moviePerPage} />}
       />
     );
 

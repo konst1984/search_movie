@@ -25,14 +25,16 @@ export default class RatedPage extends React.Component {
   currentPage = 1;
 
   componentDidMount() {
-    this.upDateState(this.props.cards);
     this.mountItemsOnPage(this.props.cards, 0, this.props.moviePerPage);
+    this.upDateState(this.props.cards);
   }
 
   // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.cards !== this.props.cards) {
       this.upDateState(this.props.cards);
+    }
+    if (prevState.page !== this.state.page) {
       this.onSwitchPage(this.state.page);
     }
   }
@@ -43,15 +45,18 @@ export default class RatedPage extends React.Component {
         if (page !== this.currentPage) {
           this.currentPage = page;
           this.data = totalCards;
+
           return {
             totalCards: totalCards,
             itemsOnPage: totalCards.slice(0, 20),
+            page: 1,
           };
         } else {
           this.currentPage = page;
           return {
             totalCards: [...this.data, ...newItems],
-            itemsOnPage: [...this.data, ...newItems],
+            itemsOnPage: [...this.data, ...newItems].slice(0, 20),
+            page: 1,
           };
         }
       });
@@ -59,9 +64,10 @@ export default class RatedPage extends React.Component {
       this.setState(({ totalCards }) => {
         this.currentPage = page;
         this.data = totalCards;
+        console.log(totalCards);
         return {
           totalCards: totalCards,
-          itemsOnPage: totalCards.slice(0, 20),
+          itemsOnPage: totalCards,
         };
       });
     }
@@ -79,7 +85,6 @@ export default class RatedPage extends React.Component {
       const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
 
       let itemsOnPage = this.state.totalCards.slice(indexOfFirstMovie, indexOfLastMovie);
-
       return {
         page,
         itemsOnPage,

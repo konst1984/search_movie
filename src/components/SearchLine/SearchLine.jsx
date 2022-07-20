@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import React, { createRef } from 'react';
+import React, { createRef, PureComponent } from 'react';
 import debounce from 'lodash.debounce';
 import { Input } from 'antd';
 import PropTypes from 'prop-types';
+import './SearchLine.css';
 
-export default class SearchLine extends React.Component {
+export default class SearchLine extends PureComponent {
   constructor(props) {
     super(props);
     this.searchRef = React.createRef();

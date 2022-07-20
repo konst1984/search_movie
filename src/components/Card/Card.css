@@ -68,7 +68,7 @@
 
 .genre {
   display: flex;
-  align-content: start;
+  align-content: flex-start;
   flex-wrap: wrap;
   gap: 5px;
   padding: 0 20px;
@@ -91,7 +91,7 @@
   width: 100%;
   align-self: end;
   grid-area: rating;
-  justify-self: flex-end;
+  text-align: right;
 }
 
 .stars-rate .ant-rate-star:not(:last-child) {
@@ -162,9 +162,6 @@
     min-width: 260px;
   }
   .card__image {
-    position: absolute;
-    padding: 0;
-    top: 0;
     width: 60px;
     height: 91px;
   }
@@ -190,5 +187,12 @@
     position: absolute;
     top: 5px;
     right: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card__title {
+    font-size: 16px;
+    font-weight: bold;
   }
 }

@@ -17,3 +17,9 @@
     padding: 15px 16px;
   }
 }
+
+@media (max-width: 340px) {
+  .main {
+    padding: 15px 10px;
+  }
+}
