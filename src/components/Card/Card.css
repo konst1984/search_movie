@@ -88,6 +88,7 @@
 .ant-rate.stars-rate {
   background: white;
   padding: 0 20px 15px 20px;
+  margin-top: 50px;
   width: 100%;
   align-self: end;
   grid-area: rating;
@@ -188,11 +189,21 @@
     top: 5px;
     right: 5px;
   }
+
+  .img_false {
+    padding: 5px;
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 400px) {
   .card__title {
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .ant-pagination .ant-pagination-item,
+  .ant-pagination-total-text {
+    margin-right: 4px;
   }
 }

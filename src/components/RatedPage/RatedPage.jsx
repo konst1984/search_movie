@@ -39,7 +39,7 @@ export default class RatedPage extends React.Component {
     }
   }
 
-  upDateState = (newItems, page) => {
+  upDateState = async (newItems, page) => {
     if (newItems && newItems.length) {
       this.setState(({ totalCards }) => {
         if (page !== this.currentPage) {
@@ -61,10 +61,9 @@ export default class RatedPage extends React.Component {
         }
       });
     } else {
-      this.setState(({ totalCards }) => {
+      await this.setState(({ totalCards }) => {
         this.currentPage = page;
         this.data = totalCards;
-        console.log(totalCards);
         return {
           totalCards: totalCards,
           itemsOnPage: totalCards,
@@ -110,7 +109,7 @@ export default class RatedPage extends React.Component {
           <Page
             {...itemProps}
             currentPage={this.state.page}
-            cards={this.state.itemsOnPage}
+            cards={this.state.itemsOnPage.length ? this.state.itemsOnPage : this.props.cards}
             countPagination={totalRatePage}
             totalPages={this.state.totalCards.length}
             onSwitchPage={this.onSwitchPage}
