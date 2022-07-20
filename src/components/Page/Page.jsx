@@ -68,7 +68,7 @@ export default class Page extends React.Component {
         ) : !(cards && searchValue) ? null : (
           <Spin tip="Loading..." size="large" />
         )}
-        {cards && totalPages > moviePerPage ? (
+        {cards && moviePerPage < totalPages ? (
           <Pagination
             current={currentPage}
             defaultPageSize={1}

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -21,12 +20,10 @@ export default class RatedPage extends React.Component {
     page: 1,
   };
 
-  data = [];
   currentPage = 1;
 
   componentDidMount() {
-    this.mountItemsOnPage(this.props.cards, 0, this.props.moviePerPage);
-    this.upDateState(this.props.cards);
+    this.upDateState(this.props.cards, 1);
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -39,13 +36,11 @@ export default class RatedPage extends React.Component {
     }
   }
 
-  upDateState = async (newItems, page) => {
+  upDateState = (newItems, page) => {
     if (newItems && newItems.length) {
       this.setState(({ totalCards }) => {
         if (page !== this.currentPage) {
           this.currentPage = page;
-          this.data = totalCards;
-
           return {
             totalCards: totalCards,
             itemsOnPage: totalCards.slice(0, 20),
@@ -54,16 +49,15 @@ export default class RatedPage extends React.Component {
         } else {
           this.currentPage = page;
           return {
-            totalCards: [...this.data, ...newItems],
-            itemsOnPage: [...this.data, ...newItems].slice(0, 20),
+            totalCards: [...newItems],
+            itemsOnPage: [...newItems].slice(0, 20),
             page: 1,
           };
         }
       });
     } else {
-      await this.setState(({ totalCards }) => {
+      this.setState(({ totalCards }) => {
         this.currentPage = page;
-        this.data = totalCards;
         return {
           totalCards: totalCards,
           itemsOnPage: totalCards,
@@ -72,18 +66,13 @@ export default class RatedPage extends React.Component {
     }
   };
 
-  mountItemsOnPage = (arr, start, end) => {
-    let itemsOnPage = arr.slice(start, end);
-    this.setState({ itemsOnPage: itemsOnPage });
-  };
-
-  onSwitchPage = async (page) => {
-    await this.setState(() => {
+  onSwitchPage = (page) => {
+    this.setState(() => {
       const indexOfLastMovie = page * this.props.moviePerPage;
 
       const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
 
-      let itemsOnPage = this.state.totalCards.slice(indexOfFirstMovie, indexOfLastMovie);
+      let itemsOnPage = this.props.cards.slice(indexOfFirstMovie, indexOfLastMovie);
       return {
         page,
         itemsOnPage,
@@ -92,11 +81,12 @@ export default class RatedPage extends React.Component {
   };
 
   render() {
-    const { cards, ...itemProps } = this.props;
+    const { cards, moviePerPage, ...itemProps } = this.props;
+    const { itemsOnPage, page } = this.state;
     let totalRatePage;
 
-    if (this.state.totalCards.length) {
-      totalRatePage = Math.ceil(this.state.totalCards.length / this.props.moviePerPage);
+    if (cards.length) {
+      totalRatePage = Math.ceil(cards.length / moviePerPage);
     }
 
     return (
@@ -108,10 +98,11 @@ export default class RatedPage extends React.Component {
         ) : (
           <Page
             {...itemProps}
-            currentPage={this.state.page}
-            cards={this.state.itemsOnPage.length ? this.state.itemsOnPage : this.props.cards}
+            moviePerPage={moviePerPage}
+            currentPage={page}
+            cards={itemsOnPage.length ? itemsOnPage : cards}
             countPagination={totalRatePage}
-            totalPages={this.state.totalCards.length}
+            totalPages={cards.length}
             onSwitchPage={this.onSwitchPage}
             disabledStar={true}
           />

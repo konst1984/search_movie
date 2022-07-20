@@ -94,9 +94,9 @@ export default class Main extends React.Component {
     this.updateAllMovie(this.state.searchValue, this.state.currentPage);
   };
 
-  onSearch = (e) => {
+  onSearch = (str) => {
     this.setState({ currentPage: 1 });
-    this.updateAllMovie(e.target.value, 1);
+    this.updateAllMovie(str, 1);
   };
 
   onRate = (value, id) => {

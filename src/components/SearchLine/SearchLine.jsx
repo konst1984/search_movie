@@ -10,6 +10,15 @@ export default class SearchLine extends PureComponent {
     super(props);
     this.searchRef = React.createRef();
   }
+
+  state = {
+    search: '',
+  };
+
+  searchRequest = (e) => {
+    this.setState({ search: e.target.value }, () => this.props.onSearch(this.state.search));
+  };
+
   componentDidMount() {
     this.searchRef.current.focus();
   }
@@ -23,10 +32,13 @@ export default class SearchLine extends PureComponent {
   };
 
   render() {
-    const { onSearch } = this.props;
     return (
       <>
-        <Input placeholder="Type to search..." onChange={debounce(onSearch, 500)} ref={this.searchRef} />
+        <Input
+          placeholder="Type to search..."
+          onChange={debounce((e) => this.searchRequest(e), 500)}
+          ref={this.searchRef}
+        />
       </>
     );
   }
