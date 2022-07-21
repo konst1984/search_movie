@@ -37,17 +37,16 @@ export default class RatedPage extends React.Component {
   }
 
   updateRatedList = (newItems, page = this.currentPage) => {
+    this.currentPage = page;
     if (newItems && newItems.length) {
       this.setState(({ totalCards }) => {
         if (page !== this.currentPage) {
-          this.currentPage = page;
           return {
             totalCards: totalCards,
             itemsOnPage: totalCards.slice(0, 20),
             page: 1,
           };
         } else {
-          this.currentPage = page;
           return {
             totalCards: [...newItems],
             itemsOnPage: [...newItems].slice(0, 20),
@@ -57,7 +56,6 @@ export default class RatedPage extends React.Component {
       });
     } else {
       this.setState(() => {
-        this.currentPage = page;
         return {
           totalCards: [...newItems],
           itemsOnPage: [...newItems],
