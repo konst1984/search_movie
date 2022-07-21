@@ -36,7 +36,7 @@ export default class RatedPage extends React.Component {
     }
   }
 
-  updateRatedList = (newItems, page) => {
+  updateRatedList = (newItems, page = this.currentPage) => {
     if (newItems && newItems.length) {
       this.setState(({ totalCards }) => {
         if (page !== this.currentPage) {
@@ -56,11 +56,11 @@ export default class RatedPage extends React.Component {
         }
       });
     } else {
-      this.setState(({ totalCards }) => {
+      this.setState(() => {
         this.currentPage = page;
         return {
-          totalCards: totalCards,
-          itemsOnPage: totalCards,
+          totalCards: [...newItems],
+          itemsOnPage: [...newItems],
         };
       });
     }
@@ -84,7 +84,6 @@ export default class RatedPage extends React.Component {
     const { cards, moviePerPage, ...itemProps } = this.props;
     const { itemsOnPage, page } = this.state;
     let totalRatePage;
-
     if (cards.length) {
       totalRatePage = Math.ceil(cards.length / moviePerPage);
     }
@@ -100,7 +99,7 @@ export default class RatedPage extends React.Component {
             {...itemProps}
             moviePerPage={moviePerPage}
             currentPage={page}
-            cards={itemsOnPage.length ? itemsOnPage : cards}
+            cards={itemsOnPage}
             countPagination={totalRatePage}
             totalPages={cards.length}
             onSwitchPage={this.onSwitchPage}

@@ -123,7 +123,8 @@ export default class Main extends React.Component {
   };
 
   render() {
-    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage, ratedListCards } = this.state;
+    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage, ratedListCards } =
+      this.state;
 
     const tabsWithPage = (
       <TabsList
