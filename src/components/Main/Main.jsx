@@ -23,7 +23,7 @@ export default class Main extends React.Component {
     moviePerPage: 20,
     searchValue: '',
     currentPage: 1,
-    ratedCards: [],
+    ratedListCards: [],
   };
 
   componentDidMount() {
@@ -84,11 +84,11 @@ export default class Main extends React.Component {
   };
 
   onSwitchPage = async (page) => {
-    await this.setState(({ ratedCards }) => {
+    await this.setState(({ ratedListCards }) => {
       return {
         currentPage: page,
         isLoading: false,
-        ratedCards: ratedCards,
+        ratedListCards: ratedListCards,
       };
     });
     this.updateAllMovie(this.state.searchValue, this.state.currentPage);
@@ -100,30 +100,30 @@ export default class Main extends React.Component {
   };
 
   onRate = (value, id) => {
-    return this.setState(({ cards, ratedCards }) => {
+    return this.setState(({ cards, ratedListCards }) => {
       const idx = cards.findIndex((el) => el.id === id);
 
       const newItem = { ...cards[idx], vote: value };
 
       const newCards = [...cards.slice(0, idx), newItem, ...cards.slice(idx + 1)];
 
-      let ratedCard = [];
+      let ratedCards = [];
       if (newCards) {
-        ratedCard = newCards.filter((card) => card.vote > 0 && !this.ratedList.includes(card.id));
+        ratedCards = newCards.filter((card) => card.vote > 0 && !this.ratedList.includes(card.id));
       }
 
-      let arrUniqRateId = [...new Set([...this.ratedList, ...ratedCard.map((item) => item.id)])];
+      let arrUniqRateId = [...new Set([...this.ratedList, ...ratedCards.map((item) => item.id)])];
       this.ratedList = [...new Set([...this.ratedList, ...arrUniqRateId])];
 
       return {
         cards: newCards,
-        ratedCards: [...ratedCards, ...ratedCard],
+        ratedListCards: [...ratedListCards, ...ratedCards],
       };
     });
   };
 
   render() {
-    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage, ratedCards } = this.state;
+    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage, ratedListCards } = this.state;
 
     const tabsWithPage = (
       <TabsList
@@ -143,7 +143,7 @@ export default class Main extends React.Component {
             />
           </>
         }
-        right={<RatedPage cards={ratedCards} isLoading={isLoading} moviePerPage={moviePerPage} />}
+        right={<RatedPage cards={ratedListCards} isLoading={isLoading} moviePerPage={moviePerPage} />}
       />
     );
 

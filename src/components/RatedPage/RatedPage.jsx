@@ -23,20 +23,20 @@ export default class RatedPage extends React.Component {
   currentPage = 1;
 
   componentDidMount() {
-    this.upDateState(this.props.cards, 1);
+    this.updateRatedList(this.props.cards, 1);
   }
 
   // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.cards !== this.props.cards) {
-      this.upDateState(this.props.cards);
+      this.updateRatedList(this.props.cards);
     }
     if (prevState.page !== this.state.page) {
       this.onSwitchPage(this.state.page);
     }
   }
 
-  upDateState = (newItems, page) => {
+  updateRatedList = (newItems, page) => {
     if (newItems && newItems.length) {
       this.setState(({ totalCards }) => {
         if (page !== this.currentPage) {
