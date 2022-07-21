@@ -20,48 +20,20 @@ export default class RatedPage extends React.Component {
     page: 1,
   };
 
-  currentPage = 1;
-
   componentDidMount() {
     this.updateRatedList(this.props.cards, 1);
   }
 
   // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.cards !== this.props.cards) {
+    if (prevProps.cards !== this.props.cards || prevState.page !== this.state.page) {
       this.updateRatedList(this.props.cards);
-    }
-    if (prevState.page !== this.state.page) {
       this.onSwitchPage(this.state.page);
     }
   }
 
-  updateRatedList = (newItems, page = this.currentPage) => {
-    this.currentPage = page;
-    if (newItems && newItems.length) {
-      this.setState(({ totalCards }) => {
-        if (page !== this.currentPage) {
-          return {
-            totalCards: totalCards,
-            itemsOnPage: totalCards.slice(0, 20),
-            page: 1,
-          };
-        } else {
-          return {
-            totalCards: [...newItems],
-            itemsOnPage: [...newItems].slice(0, 20),
-            page: 1,
-          };
-        }
-      });
-    } else {
-      this.setState(() => {
-        return {
-          totalCards: [...newItems],
-          itemsOnPage: [...newItems],
-        };
-      });
-    }
+  updateRatedList = (newItems) => {
+    this.setState({ itemsOnPage: [...newItems] });
   };
 
   onSwitchPage = (page) => {
@@ -88,22 +60,16 @@ export default class RatedPage extends React.Component {
 
     return (
       <>
-        {!cards.length ? (
-          <div className="message" style={{ fontSize: '32px', color: 'dodgerblue' }}>
-            The rating list is empty
-          </div>
-        ) : (
-          <Page
-            {...itemProps}
-            moviePerPage={moviePerPage}
-            currentPage={page}
-            cards={itemsOnPage}
-            countPagination={totalRatePage}
-            totalPages={cards.length}
-            onSwitchPage={this.onSwitchPage}
-            disabledStar={true}
-          />
-        )}
+        <Page
+          {...itemProps}
+          moviePerPage={moviePerPage}
+          currentPage={page}
+          cards={itemsOnPage}
+          countPagination={totalRatePage}
+          totalPages={cards.length}
+          onSwitchPage={this.onSwitchPage}
+          disabledStar={true}
+        />
       </>
     );
   }

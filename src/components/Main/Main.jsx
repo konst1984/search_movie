@@ -128,6 +128,7 @@ export default class Main extends React.Component {
 
     const tabsWithPage = (
       <TabsList
+        disabled={!ratedListCards.length}
         left={
           <>
             <SearchLine onSearch={this.onSearch} />

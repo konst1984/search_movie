@@ -1,4 +1,4 @@
 # My MovieApp - React project
 
-# link: https://movie-jasnsmihv-konst1984.vercel.app/
+# link: https://movie-gt5m93adc-konst1984.vercel.app/
 
