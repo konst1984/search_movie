@@ -9,7 +9,7 @@ import CardsList from '../CardsList';
 
 export default class Page extends React.Component {
   static defaultProps = {
-    cards: null,
+    cards: [],
     searchValue: null,
     disabledStar: false,
     onSwitchPage: () => {},
@@ -21,7 +21,6 @@ export default class Page extends React.Component {
     hasError: PropTypes.bool,
     currentPage: PropTypes.number,
     moviePerPage: PropTypes.number,
-    searchValue: PropTypes.string,
     totalPages: PropTypes.number,
     disabledStar: PropTypes.bool,
     countPagination: PropTypes.number,
@@ -34,7 +33,6 @@ export default class Page extends React.Component {
       isLoading,
       hasError,
       moviePerPage,
-      searchValue,
       totalPages,
       currentPage,
       countPagination,
@@ -56,31 +54,28 @@ export default class Page extends React.Component {
       )
     ) : null;
 
-    const emptyRequest =
-      searchValue && cards.length === 0 ? (
-        <Alert showIcon={false} message="Movies matching your search were not found" banner />
-      ) : null;
-
     const cardlistOrSpin = (
       <>
         {!hasData ? (
-          <CardsList cards={cards} disabledStar={disabledStar} />
-        ) : !(cards && searchValue) ? null : (
+          <>
+            <CardsList cards={cards} disabledStar={disabledStar} />
+            {cards && moviePerPage < totalPages ? (
+              <Pagination
+                current={currentPage}
+                defaultPageSize={1}
+                total={countPagination}
+                defaultCurrent={1}
+                showSizeChanger={false}
+                onChange={onSwitchPage}
+              />
+            ) : null}
+          </>
+        ) : !cards.length ? null : (
           <Spin tip="Loading..." size="large" />
         )}
-        {cards && moviePerPage < totalPages ? (
-          <Pagination
-            current={currentPage}
-            defaultPageSize={1}
-            total={countPagination}
-            defaultCurrent={1}
-            showSizeChanger={false}
-            onChange={onSwitchPage}
-          />
-        ) : null}
       </>
     );
 
-    return <>{error ? error : emptyRequest ? emptyRequest : cardlistOrSpin}</>;
+    return <>{error ? error : cardlistOrSpin}</>;
   }
 }

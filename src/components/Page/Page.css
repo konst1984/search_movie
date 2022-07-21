@@ -22,6 +22,10 @@
   margin-bottom: 34px;
 }
 
+.ant-alert.ant-alert-warning.ant-alert-no-icon.ant-alert-banner {
+  grid-column: span 2;
+}
+
 .ant-alert-message {
   font-size: 30px;
 }

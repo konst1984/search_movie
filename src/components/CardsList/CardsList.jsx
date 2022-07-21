@@ -2,20 +2,24 @@
 import React from 'react';
 import './CardsList.css';
 import PropTypes from 'prop-types';
+import { Alert } from 'antd';
 
 import Card from '../Card';
 
 const CardsList = ({ cards, disabledStar }) => {
-  let cardsList = null;
-
   const addCard = (card) => <Card key={card.id} disabledStar={disabledStar} {...card} />;
-  if (cards.length) {
-    cardsList = cards.map((card) => {
-      return addCard(card);
-    });
-  }
 
-  return <div className="cards__list">{cardsList}</div>;
+  return (
+    <div className="cards__list">
+      {cards.length ? (
+        cards.map((card) => {
+          return addCard(card);
+        })
+      ) : (
+        <Alert showIcon={false} message="Movies matching your search were not found" banner />
+      )}
+    </div>
+  );
 };
 
 CardsList.defaultProps = {

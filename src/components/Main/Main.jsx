@@ -27,7 +27,6 @@ export default class Main extends React.Component {
   };
 
   componentDidMount() {
-    this.updateAllMovie();
     this.getGenre();
   }
 
@@ -47,6 +46,7 @@ export default class Main extends React.Component {
 
   updateAllMovie = (query, page = 1) => {
     if (query) {
+      this.setState({ isLoading: false });
       this.moviesApp
         .getAllMovie(query, page)
         .then((res) => {
@@ -117,7 +117,7 @@ export default class Main extends React.Component {
   };
 
   render() {
-    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage } = this.state;
+    const { cards, isLoading, hasError, moviePerPage, totalPages, currentPage } = this.state;
 
     const tabsWithPage = (
       <TabsList
@@ -128,7 +128,6 @@ export default class Main extends React.Component {
             <SearchPage
               cards={cards}
               hasError={hasError}
-              searchValue={searchValue}
               isLoading={isLoading}
               currentPage={currentPage}
               moviePerPage={moviePerPage}
