@@ -28,12 +28,16 @@ export default class RatedPage extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.cards !== this.props.cards || prevState.page !== this.state.page) {
       this.updateRatedList(this.props.cards);
-      this.onSwitchPage(this.state.page);
     }
   }
 
   updateRatedList = (newItems) => {
-    this.setState({ itemsOnPage: [...newItems] });
+    this.setState(
+      () => {
+        return { itemsOnPage: [...newItems] };
+      },
+      () => this.onSwitchPage(this.state.page)
+    );
   };
 
   onSwitchPage = (page) => {

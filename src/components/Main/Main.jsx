@@ -14,6 +14,7 @@ export default class Main extends React.Component {
   moviesApp = new RequestApi();
   genreData;
   ratedList = [];
+  ratedListCards = [];
   state = {
     cards: [],
     totalPages: 10,
@@ -23,7 +24,6 @@ export default class Main extends React.Component {
     moviePerPage: 20,
     searchValue: '',
     currentPage: 1,
-    ratedListCards: [],
   };
 
   componentDidMount() {
@@ -84,13 +84,7 @@ export default class Main extends React.Component {
   };
 
   onSwitchPage = async (page) => {
-    await this.setState(({ ratedListCards }) => {
-      return {
-        currentPage: page,
-        isLoading: false,
-        ratedListCards: ratedListCards,
-      };
-    });
+    await this.setState({ currentPage: page, isLoading: false });
     this.updateAllMovie(this.state.searchValue, this.state.currentPage);
   };
 
@@ -100,7 +94,7 @@ export default class Main extends React.Component {
   };
 
   onRate = (value, id) => {
-    return this.setState(({ cards, ratedListCards }) => {
+    return this.setState(({ cards }) => {
       const idx = cards.findIndex((el) => el.id === id);
 
       const newItem = { ...cards[idx], vote: value };
@@ -114,21 +108,20 @@ export default class Main extends React.Component {
 
       let arrUniqRateId = [...new Set([...this.ratedList, ...ratedCards.map((item) => item.id)])];
       this.ratedList = [...new Set([...this.ratedList, ...arrUniqRateId])];
+      this.ratedListCards = [...this.ratedListCards, ...ratedCards];
 
       return {
         cards: newCards,
-        ratedListCards: [...ratedListCards, ...ratedCards],
       };
     });
   };
 
   render() {
-    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage, ratedListCards } =
-      this.state;
+    const { cards, isLoading, hasError, moviePerPage, totalPages, searchValue, currentPage } = this.state;
 
     const tabsWithPage = (
       <TabsList
-        disabled={!ratedListCards.length}
+        disabled={!this.ratedListCards.length}
         left={
           <>
             <SearchLine onSearch={this.onSearch} />
@@ -145,7 +138,7 @@ export default class Main extends React.Component {
             />
           </>
         }
-        right={<RatedPage cards={ratedListCards} isLoading={isLoading} moviePerPage={moviePerPage} />}
+        right={<RatedPage cards={this.ratedListCards} isLoading={isLoading} moviePerPage={moviePerPage} />}
       />
     );
 
