@@ -107,17 +107,17 @@ export default class Main extends React.Component {
 
       const newCards = [...cards.slice(0, idx), newItem, ...cards.slice(idx + 1)];
 
-      let rateCards = [];
+      let ratedCard = [];
       if (newCards) {
-        rateCards = newCards.filter((card) => card.vote > 0 && !this.ratedList.includes(card.id));
+        ratedCard = newCards.filter((card) => card.vote > 0 && !this.ratedList.includes(card.id));
       }
 
-      let arrUniqRateId = [...new Set([...this.ratedList, ...rateCards.map((item) => item.id)])];
+      let arrUniqRateId = [...new Set([...this.ratedList, ...ratedCard.map((item) => item.id)])];
       this.ratedList = [...new Set([...this.ratedList, ...arrUniqRateId])];
 
       return {
         cards: newCards,
-        ratedCards: [...ratedCards, ...rateCards],
+        ratedCards: [...ratedCards, ...ratedCard],
       };
     });
   };
