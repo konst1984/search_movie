@@ -1,8 +1,7 @@
-// eslint-disable-next-line no-unused-vars,import/order
 import React from 'react';
 
-import './Rating.css';
 import PropTypes from 'prop-types';
+import './Rating.css';
 
 const Rating = ({ vote }) => {
   let color;

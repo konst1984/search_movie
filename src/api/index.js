@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class RequestApi extends React.Component {
+export default class Index extends React.Component {
   getData = async (url) => {
     try {
       const response = await fetch(url, {

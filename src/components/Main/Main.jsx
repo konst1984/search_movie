@@ -1,17 +1,16 @@
-// eslint-disable-next-line import/order
 import React from 'react';
+
+import Index from '../../api';
+import SearchLine from '../SearchLine';
+import SearchPage from '../SearchPage';
+import RatedPage from '../RatedPage';
+import TabsList from '../TabsList/TabsList';
+import MyContext from '../../context/ContextGenre';
 
 import './Main.css';
 
-import RequestApi from '../../Request-api/Request-api';
-import SearchLine from '../SearchLine/SearchLine';
-import SearchPage from '../SearchPage/SearchPage';
-import RatedPage from '../RatedPage/RatedPage';
-import TabsList from '../TabsList/TabsList';
-import MyContext from '../ApiContext/ApiContext';
-
 export default class Main extends React.Component {
-  moviesApp = new RequestApi();
+  moviesApp = new Index();
   genreData;
   ratedList = [];
   ratedListCards = [];
@@ -30,14 +29,12 @@ export default class Main extends React.Component {
     this.getGenre();
   }
 
-  // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.searchValue !== this.state.searchValue) {
       this.updateAllMovie(this.state.searchValue, 1);
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
   componentDidCatch(error, errorInfo) {
     this.setState({
       hasError: true,
@@ -94,26 +91,23 @@ export default class Main extends React.Component {
   };
 
   onRate = (value, id) => {
-    return this.setState(({ cards }) => {
-      const idx = cards.findIndex((el) => el.id === id);
+    const { cards } = this.state;
+    const idx = cards.findIndex((el) => el.id === id);
 
-      const newItem = { ...cards[idx], vote: value };
+    const newItem = { ...cards[idx], vote: value };
 
-      const newCards = [...cards.slice(0, idx), newItem, ...cards.slice(idx + 1)];
+    const newCards = [...cards.slice(0, idx), newItem, ...cards.slice(idx + 1)];
 
-      let ratedCards = [];
-      if (newCards) {
-        ratedCards = newCards.filter((card) => card.vote > 0 && !this.ratedList.includes(card.id));
-      }
+    let ratedCards = [];
+    if (newCards) {
+      ratedCards = newCards.filter((card) => card.vote > 0 && !this.ratedList.includes(card.id));
+    }
 
-      let arrUniqRateId = [...new Set([...this.ratedList, ...ratedCards.map((item) => item.id)])];
-      this.ratedList = [...new Set([...this.ratedList, ...arrUniqRateId])];
-      this.ratedListCards = [...this.ratedListCards, ...ratedCards];
+    let arrUniqRateId = [...new Set([...this.ratedList, ...ratedCards.map((item) => item.id)])];
+    this.ratedList = [...new Set([...this.ratedList, ...arrUniqRateId])];
+    this.ratedListCards = [...this.ratedListCards, ...ratedCards];
 
-      return {
-        cards: newCards,
-      };
-    });
+    return this.setState({ cards: newCards });
   };
 
   render() {

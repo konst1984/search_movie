@@ -1,10 +1,8 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Rate } from 'antd';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line import/no-unresolved
-import MyContext from '../../ApiContext/ApiContext';
+import MyContext from '../../../context/ContextGenre';
 
 export default class RatingStars extends React.Component {
   state = {

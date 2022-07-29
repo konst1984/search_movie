@@ -1,16 +1,16 @@
-// eslint-disable-next-line import/order
 import React from 'react';
 
-import './Card.css';
 import 'antd/dist/antd.min.css';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
-import MyContext from '../ApiContext/ApiContext';
+import MyContext from '../../context/ContextGenre';
 
 import Rating from './Rating';
 import Genre from './Genre';
 import RatingStars from './RatingStars';
+
+import './Card.css';
 
 export default class Card extends React.Component {
   static defaultProps = {

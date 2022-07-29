@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import React, { createRef, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import debounce from 'lodash.debounce';
 import { Input } from 'antd';
 import PropTypes from 'prop-types';

@@ -1,8 +1,7 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Tabs } from 'antd';
-import 'antd/dist/antd.css';
 import PropTypes from 'prop-types';
+import 'antd/dist/antd.css';
 
 const { TabPane } = Tabs;
 

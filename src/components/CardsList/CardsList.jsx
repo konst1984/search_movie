@@ -1,10 +1,9 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
-import './CardsList.css';
 import PropTypes from 'prop-types';
 import { Alert } from 'antd';
 
 import Card from '../Card';
+import './CardsList.css';
 
 const CardsList = ({ cards, disabledStar }) => {
   const addCard = (card) => <Card key={card.id} disabledStar={disabledStar} {...card} />;

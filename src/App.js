@@ -1,9 +1,10 @@
+import './App.css';
+
 import React from 'react';
 
-import './App.css';
 import Main from './components/Main';
 
-export default class App extends React.Component {
+export default class Index extends React.Component {
   render() {
     return (
       <div className="App">

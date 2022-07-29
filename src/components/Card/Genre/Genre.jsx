@@ -1,7 +1,6 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
-import './Genre.css';
 import PropTypes from 'prop-types';
+import './Genre.css';
 
 export default class Genre extends React.Component {
   static propTypes = {

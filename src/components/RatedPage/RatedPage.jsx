@@ -24,7 +24,6 @@ export default class RatedPage extends React.Component {
     this.updateRatedList(this.props.cards, 1);
   }
 
-  // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.cards !== this.props.cards || prevState.page !== this.state.page) {
       this.updateRatedList(this.props.cards);
@@ -55,7 +54,7 @@ export default class RatedPage extends React.Component {
   };
 
   render() {
-    const { cards, moviePerPage, ...itemProps } = this.props;
+    const { cards, moviePerPage, isLoading } = this.props;
     const { itemsOnPage, page } = this.state;
     let totalRatePage;
     if (cards.length) {
@@ -65,7 +64,7 @@ export default class RatedPage extends React.Component {
     return (
       <>
         <Page
-          {...itemProps}
+          isLoading={isLoading}
           moviePerPage={moviePerPage}
           currentPage={page}
           cards={itemsOnPage}
