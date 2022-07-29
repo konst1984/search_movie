@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { Alert } from 'antd';
+import PropTypes from 'prop-types';
 
 import Card from '../Card';
 import './CardsList.css';

@@ -52,6 +52,12 @@
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

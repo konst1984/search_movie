@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import debounce from 'lodash.debounce';
+
 import { Input } from 'antd';
+import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import './SearchLine.css';
 

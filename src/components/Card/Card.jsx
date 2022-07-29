@@ -1,13 +1,13 @@
 import React from 'react';
 
 import 'antd/dist/antd.min.css';
-import PropTypes from 'prop-types';
 import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import MyContext from '../../context/ContextGenre';
 
-import Rating from './Rating';
 import Genre from './Genre';
+import Rating from './Rating';
 import RatingStars from './RatingStars';
 
 import './Card.css';
