@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Index from '../../api';
+import MyContext from '../../context/ContextGenre';
+import RatedPage from '../RatedPage';
 import SearchLine from '../SearchLine';
 import SearchPage from '../SearchPage';
-import RatedPage from '../RatedPage';
 import TabsList from '../TabsList/TabsList';
-import MyContext from '../../context/ContextGenre';
 
 import './Main.css';
 
