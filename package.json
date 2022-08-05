@@ -2,12 +2,10 @@
   "name": "movies-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://konst1984.github.io/MyMovieApp",
   "author": "Varjutin",
   "binary": {
     "module_name": "my-todo",
-    "module_path": "./build",
-    "host": "https://github.com/konst1984/Movie.git"
+    "module_path": "./build"
   },
   "dependencies": {
     "@ant-design/icons": "latest",

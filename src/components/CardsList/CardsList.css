@@ -10,6 +10,10 @@ ul.ant-pagination {
   margin-top: 50px;
 }
 
+button#rc-tabs-0-more {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .cards__list {
     gap: 20px;
