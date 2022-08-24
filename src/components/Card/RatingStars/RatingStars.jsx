@@ -3,7 +3,7 @@ import React from 'react';
 import { Rate } from 'antd';
 import PropTypes from 'prop-types';
 
-import MyContext from '../../../context/ContextGenre';
+import MyContext from '../../../context';
 
 export default class RatingStars extends React.Component {
   state = {

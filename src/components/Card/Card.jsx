@@ -4,7 +4,7 @@ import 'antd/dist/antd.min.css';
 import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 
-import MyContext from '../../context/ContextGenre';
+import MyContext from '../../context';
 
 import Genre from './Genre';
 import Rating from './Rating';
